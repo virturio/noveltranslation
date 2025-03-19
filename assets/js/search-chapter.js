@@ -23,23 +23,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (data.length > 0) {
           resultsDiv.innerHTML = data
-            .map(
-              (chapter) => `
+            .map((chapter) => {
+              return `
                 <div class="search-result-item">
-                    <div class="text-[14px] font-semibold text-white">
+                    <a href="${chapter.url}" class="text-[14px] font-semibold text-white">
                         ${chapter.title}
-                    </div>
-                    <div class="text-[12px] text-nv-text-gray">
-                        ${chapter.excerpt || ""}
-                    </div>
+                    </a>
                 </div>
-              `
-            )
+              `;
+            })
             .join("");
         } else {
           resultsDiv.innerHTML =
             "<div class='search-result-item text-[14px] font-semibold text-white'>No results found</div>";
-          searchContainer.classList.remove("active");
         }
       })
       .catch((error) => {

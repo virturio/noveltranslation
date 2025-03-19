@@ -2,7 +2,7 @@
 <!-- Banner -->
 <?php
 if (has_post_thumbnail()): ?>
-    <div class="absolute z-[-1] max-h-[300px] mt-[24px] w-full overflow-hidden">
+    <div class="absolute z-[-1] max-h-[300px] mt-[64px] w-full overflow-hidden">
         <img src="<?php the_post_thumbnail_url('medium_large'); ?>" alt="Novo Translation"
             class="w-full object-cover h-full translate-y-[-200px]" />
         <div class="absolute z-10 w-full h-full top-0 left-0 bg-gradient-to-b from-transparent to-novo-bg"></div>
@@ -29,19 +29,13 @@ if (has_post_thumbnail()): ?>
             <?php novo_construct_searchbar(); ?>
 
             <!-- Ko-fi Button -->
-            <a href="https://ko-fi.com/F2F21C4DA1"
-                class="kofi-button bg-novo-kofi px-6 h-[44px] rounded-lg flex items-center gap-3 max-sm:h-[44px] max-sm:w-[44px] max-sm:p-0">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/kofi-cup.png'); ?>"
-                    alt='Buy Me a Coffee at ko-fi.com' target='_blank' class="kofi-cup h-5 max-sm:height-[18px]" />
-                <span class="kofi-text max-sm:hidden text-base font-semibold">Buy Me a Coffee</span>
-            </a>
+            <?php nv_construct_kofi_button(); ?>
         </div>
 
         <!-- Chapter List -->
         <div class="space-y-4 flex flex-col gap-4 items-center justify-center">
             <?php
             $paged = get_query_var('page') ? absint(get_query_var('page')) : 1;
-
             $args = array(
                 'post_type' => 'chapter',
                 'posts_per_page' => 5,
@@ -51,33 +45,18 @@ if (has_post_thumbnail()): ?>
             );
 
             $args = novo_filter_args($args);
-
             $query = new WP_Query($args);
 
-            if ($query->have_posts()) {
-                while ($query->have_posts()) {
-                    $query->the_post();
-                    ?>
-                    <a href="<?php echo get_the_permalink(); ?>">
-                        <div
-                            class="bg-novo-card rounded-2xl px-8 py-6 space-y-2 cursor-pointer hover:bg-novo-card-hover transition-all duration-200">
-                            <h3 class="text-xl font-semibold line-clamp-2">
-                                <?php echo get_the_title(); ?>
-                            </h3>
-                            <p class="text-[14px] text-base font-semibold text-novo-text-gray">
-                                <?php echo get_the_excerpt(); ?>
-                            </p>
-                        </div>
-                    </a>
-                    <?php
-                }
+            if ($query->have_posts()):
+                while ($query->have_posts()):
+                    $query->the_post(); ?>
+                    <?php the_chapters(); ?>
+                <?php endwhile;
+            endif;
 
-                novo_construct_paginated_links($query);
-            }
+            novo_display_pagination($query);
             wp_reset_postdata();
             ?>
-
-
 
         </div>
     </div>

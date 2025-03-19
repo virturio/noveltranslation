@@ -27,6 +27,11 @@ Use it to make something cool, have fun, and share what you've learned with othe
     pointer-events: none !important;
     opacity: 0.5 !important;
   }
+
+  a:hover {
+    text-decoration: underline !important;
+    /* color: #155dfc !important; */
+  }
 }
 
 @theme {

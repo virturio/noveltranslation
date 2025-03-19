@@ -24,7 +24,7 @@ function search_chapters()
             $search_query->the_post();
             $results[] = [
                 'title' => get_the_title(),
-                'url' => get_permalink()
+                'url' => get_permalink(),
             ];
         }
     }
