@@ -1,0 +1,159 @@
+/*
+Theme Name: Novo Translation
+Author: Muhammad Rio
+Author URI: https://wordpress.org/
+Description: Tutorial Theme
+Version: 1.0
+Requires at least: 5.0
+Tested up to: 5.4
+Requires PHP: 7.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: novotranslation
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+@import "tailwindcss";
+@layer base {
+  html {
+    font-family: "Fira Sans", "sans-serif";
+    height: 100vh;
+    color: #ffffff;
+    background-color: var(--color-novo-bg);
+  }
+
+  a.disabled {
+    pointer-events: none !important;
+    opacity: 0.5 !important;
+  }
+}
+
+@theme {
+  --color-novo-bg: #0a0002;
+  --color-novo-header: #110104;
+  --color-novo-card: rgba(34, 2, 8, 0.5);
+  --color-novo-card-hover: rgba(34, 2, 8, 0.7);
+  --color-novo-card-full: rgba(34, 2, 8, 1);
+  --color-novo-search: rgba(34, 2, 8, 1);
+  --color-novo-search-hover: rgba(64, 10, 20, 1);
+  --color-novo-kofi: #2b83cc;
+  --color-novo-next: #1e1e1e;
+  --color-novo-border: #4a4c4c;
+  --color-novo-text-gray: #8f8f8f;
+  --color-novo-chapter-text: #d7d7d7;
+}
+
+.dropdown-content {
+  transform: translateY(-10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.dropdown.active .dropdown-content {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown-button:hover,
+.dropdown-item:hover {
+  background-color: #380913;
+}
+
+.chevron {
+  transition: transform 0.3s ease;
+}
+
+.dropdown.active .chevron {
+  transform: rotate(180deg);
+}
+
+/* Search Results Animation */
+#search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--color-novo-card-full);
+  border: 1px solid var(--color-novo-border);
+  border-radius: 8px;
+  padding: 8px 0;
+  transform: translateY(-10px);
+  opacity: 0;
+  display: none;
+  transition: all 0.3s ease;
+  z-index: 50;
+}
+
+.search-container.active #search-results {
+  transform: translateY(0);
+  opacity: 1;
+  display: block;
+}
+
+.search-result-item {
+  padding: 8px 16px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.search-result-item:hover {
+  background-color: rgba(74, 76, 76, 0.3);
+}
+
+/* Ko-fi Button Styles */
+@keyframes shake {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1.2);
+  }
+  25% {
+    transform: rotate(-5deg) scale(1.2);
+  }
+  75% {
+    transform: rotate(5deg) scale(1.2);
+  }
+}
+
+.kofi-button {
+  transition: all 0.3s ease;
+}
+
+.kofi-button:hover {
+  background: #3291d8;
+}
+
+.kofi-cup {
+  transition: all 0.3s ease;
+}
+
+.kofi-button:hover .kofi-cup {
+  animation: shake 0.5s ease-in-out;
+  animation-iteration-count: 1;
+}
+
+/* Responsive Ko-fi button */
+@media (max-width: 1024px) {
+  .kofi-button {
+    /* padding: 0 !important; */
+    /* width: 44px; */
+    justify-content: center;
+  }
+
+  .kofi-cup {
+    margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .kofi-button {
+    /* width: 40px; */
+    height: 40px !important;
+  }
+
+  .kofi-cup {
+    height: 18px !important;
+  }
+}

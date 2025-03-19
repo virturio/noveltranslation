@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>nv Translation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .dropdown-content {
+        transform: translateY(-10px);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .dropdown.active .dropdown-content {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .dropdown-button:hover,
+      .dropdown-item:hover {
+        background-color: rgba(74, 76, 76, 0.3);
+      }
+
+      .chevron {
+        transition: transform 0.3s ease;
+      }
+
+      .dropdown.active .chevron {
+        transform: rotate(180deg);
+      }
+
+      /* Search Results Animation */
+      .search-results {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        right: 0;
+        background: rgba(34, 2, 8, 0.95);
+        border: 1px solid #4a4c4c;
+        border-radius: 8px;
+        padding: 8px 0;
+        transform: translateY(-10px);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 50;
+      }
+
+      .search-container.active .search-results {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .search-result-item {
+        padding: 8px 16px;
+        transition: all 0.2s ease;
+      }
+
+      .search-result-item:hover {
+        background-color: rgba(74, 76, 76, 0.3);
+      }
+
+      /* Ko-fi Button Styles */
+      @keyframes shake {
+        0%,
+        100% {
+          transform: rotate(0deg) scale(1.2);
+        }
+        25% {
+          transform: rotate(-5deg) scale(1.2);
+        }
+        75% {
+          transform: rotate(5deg) scale(1.2);
+        }
+      }
+
+      .kofi-button {
+        transition: all 0.3s ease;
+      }
+
+      .kofi-button:hover {
+        background: #3291d8;
+      }
+
+      .kofi-cup {
+        transition: all 0.3s ease;
+      }
+
+      .kofi-button:hover .kofi-cup {
+        animation: shake 0.5s ease-in-out;
+        animation-iteration-count: 1;
+      }
+
+      /* Responsive Ko-fi button */
+      @media (max-width: 1024px) {
+        .kofi-button {
+          /* padding: 0 !important; */
+          /* width: 44px; */
+          justify-content: center;
+        }
+
+        .kofi-cup {
+          margin: 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .kofi-button {
+          /* width: 40px; */
+          height: 40px !important;
+        }
+
+        .kofi-cup {
+          height: 18px !important;
+        }
+      }
+
+      /* Responsive Filter Styles */
+      @media (max-width: 1024px) {
+        .filter-text {
+          display: none;
+        }
+
+        .filter-button {
+          padding: 0 12px !important;
+          min-width: 44px;
+          justify-content: center;
+        }
+
+        .calendar-icon,
+        .sort-icon {
+          margin: 0 !important;
+        }
+
+        .dropdown-content {
+          left: 120% !important;
+          transform: translateX(-50%) translateY(-10px) !important;
+        }
+
+        .dropdown.active .dropdown-content {
+          transform: translateX(-50%) translateY(0) !important;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .filter-button {
+          padding: 0 10px !important;
+          min-width: 40px;
+        }
+
+        .calendar-icon,
+        .sort-icon {
+          width: 18px !important;
+          height: 18px !important;
+        }
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          purge: ["./src/**/*.{html,js,php}"],
+          extend: {
+            fontFamily: {
+              fira: ["Fira Sans", "sans-serif"],
+            },
+            colors: {
+              nvg: "#0A0002",
+              nveader: "#110104",
+              nvard: "rgba(34, 2, 8, 0.5)",
+              "nvard-hover": "rgba(34, 2, 8, 0.7)",
+              "nvard-full": "rgba(34, 2, 8, 1)",
+              nvearch: "rgba(34, 2, 8, 1)",
+              "nvearch-hover": "rgba(64, 10, 20, 1)",
+              nvofi: "#2B83CC",
+              nvext: "#1E1E1E",
+              nvorder: "#4A4C4C",
+              "nvext-gray": "#8F8F8F",
+              nvopyright: "#959595",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-nvg font-fira min-h-screen text-white">
+    <div class="absolute z-[-1] max-h-[300px] mt-[64px] w-full overflow-hidden">
+      <img
+        src="images/banner.jpg"
+        alt="nvranslation"
+        class="w-full object-cover h-full translate-y-[-200px]"
+      />
+      <div
+        class="absolute z-10 w-full h-full top-0 left-0 bg-gradient-to-b from-transparent to-nvg"
+      ></div>
+    </div>
+    <!-- Header -->
+    <header
+      class="bg-nveader fixed top-0 left-0 right-0 h-[64px] px-6 flex items-center justify-center z-10"
+    >
+      <div class="max-w-[984px] w-full">
+        <a href="index.html" class="text-xl font-bold"> nvranslation </a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="w-full flex items-center justify-center px-6">
+      <div class="max-w-[984px] py-8 w-full">
+        <h2 class="text-xl font-bold text-center mb-[32px] mt-[110px]">
+          Recent Posts
+        </h2>
+
+        <!-- Search and Filter Section -->
+        <div class="flex items-center justify-between mb-4 h-[44px]">
+          <div class="flex gap-2 h-full">
+            <!-- Date Filter -->
+            <div class="dropdown relative h-full">
+              <button
+                class="dropdown-button filter-button flex items-center justify-between px-4 h-full rounded-lg bg-nvard border border-nvnvder focus:outline-none"
+                onclick="toggleDropdown(event)"
+              >
+                <!-- Calendar Icon -->
+                <svg
+                  class="w-5 h-5 calendar-icon"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 4h-1V3c0-.55-.45-1-1-1s-1 .45-1 1v1H8V3c0-.55-.45-1-1-1s-1 .45-1 1v1H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5zm2 4h10v2H7zm0 4h7v2H7z"
+                  />
+                </svg>
+                <span
+                  class="text-[14px] font-semibold selected-value filter-text ml-2"
+                  >Date</span
+                >
+                <svg
+                  class="w-4 h-4 ml-2 chevron filter-text"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M7 10l5 5 5-5z" />
+                </svg>
+              </button>
+              <div
+                class="dropdown-content absolute top-[calc(100%+4px)] left-0 w-[110px] text-center bg-nvard-full border border-nvnvder rounded-lg overflow-hidden z-10"
+              >
+                <div
+                  class="dropdown-item px-4 py-2 cursor-pointer text-[14px] font-semibold"
+                  data-value="this-month"
+                >
+                  This Month
+                </div>
+                <div
+                  class="dropdown-item px-4 py-2 cursor-pointer text-[14px] font-semibold"
+                  data-value="this-year"
+                >
+                  This Year
+                </div>
+              </div>
+            </div>
+            <!-- Sort Filter -->
+            <div class="dropdown relative h-full">
+              <button
+                class="dropdown-button filter-button flex items-center justify-between px-4 h-full rounded-lg bg-nvard border border-nvnvder focus:outline-none"
+                onclick="toggleDropdown(event)"
+              >
+                <!-- Sort Icon -->
+                <svg
+                  class="w-5 h-5 sort-icon"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z" />
+                </svg>
+                <span
+                  class="text-[14px] font-semibold selected-value filter-text ml-2"
+                  >Sort by</span
+                >
+                <svg
+                  class="w-4 h-4 ml-2 chevron filter-text"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M7 10l5 5 5-5z" />
+                </svg>
+              </button>
+              <div
+                class="dropdown-content absolute top-[calc(100%+4px)] left-0 w-[150px] text-center bg-nvard-full border border-nvnvder rounded-lg overflow-hidden z-10"
+              >
+                <div
+                  class="dropdown-item px-4 py-2 cursor-pointer text-[14px] font-semibold"
+                  data-value="newest"
+                >
+                  Newest to oldest
+                </div>
+                <div
+                  class="dropdown-item px-4 py-2 cursor-pointer text-[14px] font-semibold"
+                  data-value="oldest"
+                >
+                  Oldest to newest
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="flex-1 mx-2 h-[44px]">
+            <div
+              class="search-container h-full relative transition-all duration-300 ease"
+            >
+              <div
+                class="search-bar group flex items-center justify-center bg-nvearch rounded-lg px-5 h-full gap-4 transition-all duration-300 ease border border-transparent hover:bg-nvnvrch-hover hover:shadow-lg focus-within:border-yellow-500 focus-within:border-2 focus-within:shadow-lg"
+              >
+                <svg
+                  class="h-6 text-nvext-gray search-icon transition-all duration-300 ease group-hover:text-white group-hover:scale-110 group-focus-within:text-white group-focus-within:scale-110"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M21.71 20.29l-5.01-5.01C17.54 13.68 18 11.91 18 10c0-4.41-3.59-8-8-8S2 5.59 2 10s3.59 8 8 8c1.91 0 3.68-.46 5.28-1.3l5.01 5.01c.39.39 1.02.39 1.41 0l1.41-1.41c.39-.39.39-1.02 0-1.41zM10 16c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"
+                  />
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search posts"
+                  class="search-input bg-transparent text-[14px] font-semibold text-white focus:outline-none w-full"
+                  oninput="handleSearch(event)"
+                />
+              </div>
+              <!-- Search Results Dropdown -->
+              <div class="search-results">
+                <div class="search-result-item">
+                  <div class="text-[14px] font-semibold text-white">
+                    Why Am I a Priestess When I Reach the Maximum Level?
+                  </div>
+                  <div class="text-[12px] text-nvext-gray">
+                    Chapter 94: Surrounding the Sage
+                  </div>
+                </div>
+                <div class="search-result-item">
+                  <div class="text-[14px] font-semibold text-white">
+                    The Sage's Ascension
+                  </div>
+                  <div class="text-[12px] text-nvext-gray">
+                    Chapter 156: The Final Battle
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ko-fi Button -->
+          <a
+            href="#"
+            class="kofi-button bg-nvofi px-6 h-[44px] rounded-lg flex items-center gap-3 max-sm:h-[44px] max-sm:w-[44px] max-sm:p-0"
+          >
+            <img
+              src="images/kofi-cup.png"
+              alt="Ko-fi"
+              class="kofi-cup h-5 max-sm:height-[18px]"
+            />
+            <span class="kofi-text max-sm:hidden text-base font-semibold"
+              >Support me on Ko-fi</span
+            >
+          </a>
+        </div>
+
+        <!-- Chapter List -->
+        <div class="space-y-4">
+          <!-- Chapter Card (repeated 10 times) -->
+          <div
+            class="bg-nvard rounded-2xl px-8 py-6 space-y-2 cursor-pointer hover:bg-nvnvd-hover transition-all duration-200"
+          >
+            <h3 class="text-xl font-semibold line-clamp-1">
+              Why Am I a Priestess When I Reach the Maximum Level?
+            </h3>
+            <p class="text-[14px] text-base font-semibold text-nvext-gray">
+              [Vol. 6] Chapter 94: Surrounding the Sage
+            </p>
+            <p class="text-sm font-light text-nvext-gray line-clamp-2">
+              After leaving only the Light Elemental Spirit to protect the Peach
+              Blossom Guardians just in case, Violet and the others continued
+              deeper into the Peach Blossom Forest.
+            </p>
+            <p class="text-[14px] text-nvext-gray font-semibold text-end">
+              5 minutes ago
+            </p>
+          </div>
+          <!-- Repeat the above card structure 9 more times -->
+          <div
+            class="bg-nvard rounded-2xl px-8 py-6 space-y-2 cursor-pointer hover:bg-nvnvd-hover transition-all duration-200"
+          >
+            <h3 class="text-xl font-semibold line-clamp-1">
+              Why Am I a Priestess When I Reach the Maximum Level?
+            </h3>
+            <p class="text-[14px] text-base font-semibold text-nvext-gray">
+              [Vol. 6] Chapter 94: Surrounding the Sage
+            </p>
+            <p class="text-sm font-light text-nvext-gray line-clamp-2">
+              After leaving only the Light Elemental Spirit to protect the Peach
+              Blossom Guardians just in case, Violet and the others continued
+              deeper into the Peach Blossom Forest.
+            </p>
+            <p class="text-[14px] text-nvext-gray font-semibold text-end">
+              5 minutes ago
+            </p>
+          </div>
+          <div
+            class="bg-nvard rounded-2xl px-8 py-6 space-y-2 cursor-pointer hover:bg-nvnvd-hover transition-all duration-200"
+          >
+            <h3 class="text-xl font-semibold line-clamp-1">
+              Why Am I a Priestess When I Reach the Maximum Level?
+            </h3>
+            <p class="text-[14px] text-base font-semibold text-nvext-gray">
+              [Vol. 6] Chapter 94: Surrounding the Sage
+            </p>
+            <p class="text-sm font-light text-nvext-gray line-clamp-2">
+              After leaving only the Light Elemental Spirit to protect the Peach
+              Blossom Guardians just in case, Violet and the others continued
+              deeper into the Peach Blossom Forest.
+            </p>
+            <p class="text-[14px] text-nvext-gray font-semibold text-end">
+              5 minutes ago
+            </p>
+          </div>
+          <div
+            class="bg-nvard rounded-2xl px-8 py-6 space-y-2 cursor-pointer hover:bg-nvnvd-hover transition-all duration-200"
+          >
+            <h3 class="text-xl font-semibold line-clamp-1">
+              Why Am I a Priestess When I Reach the Maximum Level?
+            </h3>
+            <p class="text-[14px] text-base font-semibold text-nvext-gray">
+              [Vol. 6] Chapter 94: Surrounding the Sage
+            </p>
+            <p class="text-sm font-light text-nvext-gray line-clamp-2">
+              After leaving only the Light Elemental Spirit to protect the Peach
+              Blossom Guardians just in case, Violet and the others continued
+              deeper into the Peach Blossom Forest.
+            </p>
+            <p class="text-[14px] text-nvext-gray font-semibold text-end">
+              5 minutes ago
+            </p>
+          </div>
+        </div>
+
+        <!-- Next Button -->
+        <div class="flex justify-center mt-8">
+          <button
+            class="bg-nvext px-6 rounded-lg text-base py-2 tracking-[.1rem]"
+          >
+            Next >>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-nveader py-7 px-20">
+      <div
+        class="container mx-auto flex flex-col items-center text-center justify-center gap-6 max-w-[400px]"
+      >
+        <nav class="text-sm">
+          <a href="#" class="hover:underline">About</a> |
+          <a href="#" class="hover:underline">Privacy Policy</a> |
+          <a href="#" class="hover:underline">Terms of Service</a> |
+          <a href="#" class="hover:underline">Contact Us</a>
+        </nav>
+        <p class="text-sm text-nvext-gray text-center">
+          Copyright © 2025 <a href="#" class="hover:underline">nvl</a>. All
+          Rights Reserved
+        </p>
+      </div>
+    </footer>
+    <script>
+      function toggleDropdown(event) {
+        event.stopPropagation();
+        const dropdown = event.currentTarget.closest(".dropdown");
+        const wasActive = dropdown.classList.contains("active");
+
+        // Close all dropdowns
+        document
+          .querySelectorAll(".dropdown")
+          .forEach((d) => d.classList.remove("active"));
+
+        // Toggle the clicked dropdown
+        if (!wasActive) {
+          dropdown.classList.add("active");
+        }
+      }
+
+      // Handle dropdown item selection
+      document.querySelectorAll(".dropdown-item").forEach((item) => {
+        item.addEventListener("click", (e) => {
+          const dropdown = e.currentTarget.closest(".dropdown");
+          const selectedValue = e.currentTarget.textContent;
+          dropdown.querySelector(".selected-value").textContent = selectedValue;
+          dropdown.classList.remove("active");
+        });
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".dropdown")) {
+          document
+            .querySelectorAll(".dropdown")
+            .forEach((d) => d.classList.remove("active"));
+        }
+      });
+
+      // Add these new functions for search functionality
+      function handleSearch(event) {
+        const searchContainer = event.target.closest(".search-container");
+        const searchResults = searchContainer.querySelector(".search-results");
+
+        if (event.target.value.length > 0) {
+          searchContainer.classList.add("active");
+        } else {
+          searchContainer.classList.remove("active");
+        }
+      }
+
+      // Close search results when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".search-container")) {
+          document
+            .querySelectorAll(".search-container")
+            .forEach((container) => {
+              container.classList.remove("active");
+            });
+        }
+      });
+    </script>
+  </body>
+</html>
