@@ -1,17 +1,17 @@
 <?php
 
-if (!function_exists('novo_do_attr')) {
-    function novo_do_attr($context, $attributes = array(), $settings = array())
+if (!function_exists('nv_do_attr')) {
+    function nv_do_attr($context, $attributes = array(), $settings = array())
     {
-        $attributes = novo_get_attr($context, $attributes, $settings);
+        $attributes = nv_get_attr($context, $attributes, $settings);
         echo $attributes;
     }
 }
 
-if (!function_exists('novo_get_attr')) {
-    function novo_get_attr($context, $attributes = array(), $settings = array())
+if (!function_exists('nv_get_attr')) {
+    function nv_get_attr($context, $attributes = array(), $settings = array())
     {
-        $attributes = apply_filters('novo_parse_attr', $attributes, $context, $settings);
+        $attributes = apply_filters('nv_parse_attr', $attributes, $context, $settings);
         $output = '';
 
         // Cycle through attributes, build tag attribute string.

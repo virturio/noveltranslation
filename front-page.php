@@ -5,7 +5,7 @@ if (has_post_thumbnail()): ?>
     <div class="absolute z-[-1] max-h-[300px] mt-[64px] w-full overflow-hidden">
         <img src="<?php the_post_thumbnail_url('medium_large'); ?>" alt="Novo Translation"
             class="w-full object-cover h-full translate-y-[-200px]" />
-        <div class="absolute z-10 w-full h-full top-0 left-0 bg-gradient-to-b from-transparent to-novo-bg"></div>
+        <div class="absolute z-10 w-full h-full top-0 left-0 bg-gradient-to-b from-transparent to-nv-bg"></div>
     </div>
 <?php endif; ?>
 
@@ -20,13 +20,13 @@ if (has_post_thumbnail()): ?>
         <div class="flex items-center justify-between mb-4 h-[44px]">
             <div class="flex gap-2 h-full">
                 <!-- Date Filter -->
-                <?php novo_construct_dropdown('date'); ?>
+                <?php nv_construct_dropdown('date'); ?>
                 <!-- Sort Filter -->
-                <?php novo_construct_dropdown('sort-by'); ?>
+                <?php nv_construct_dropdown('sort-by'); ?>
             </div>
 
             <!-- Search Bar -->
-            <?php novo_construct_searchbar(); ?>
+            <?php nv_construct_searchbar(); ?>
 
             <!-- Ko-fi Button -->
             <?php nv_construct_kofi_button(); ?>
@@ -44,7 +44,7 @@ if (has_post_thumbnail()): ?>
                 'paged' => $paged,
             );
 
-            $args = novo_filter_args($args);
+            $args = nv_filter_args($args);
             $query = new WP_Query($args);
 
             if ($query->have_posts()):
@@ -54,7 +54,7 @@ if (has_post_thumbnail()): ?>
                 <?php endwhile;
             endif;
 
-            novo_display_pagination($query);
+            nv_display_pagination($query);
             wp_reset_postdata();
             ?>
 

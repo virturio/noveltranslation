@@ -20,7 +20,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
     font-family: "Fira Sans", "sans-serif";
     height: 100vh;
     color: #ffffff;
-    background-color: var(--color-novo-bg);
+    background-color: var(--color-nv-bg);
   }
 
   a.disabled {
@@ -35,18 +35,18 @@ Use it to make something cool, have fun, and share what you've learned with othe
 }
 
 @theme {
-  --color-novo-bg: #0a0002;
-  --color-novo-header: #110104;
-  --color-novo-card: rgba(34, 2, 8, 0.5);
-  --color-novo-card-hover: rgba(34, 2, 8, 0.7);
-  --color-novo-card-full: rgba(34, 2, 8, 1);
-  --color-novo-search: rgba(34, 2, 8, 1);
-  --color-novo-search-hover: rgba(64, 10, 20, 1);
-  --color-novo-kofi: #2b83cc;
-  --color-novo-next: #1e1e1e;
-  --color-novo-border: #4a4c4c;
-  --color-novo-text-gray: #8f8f8f;
-  --color-novo-chapter-text: #d7d7d7;
+  --color-nv-bg: #0a0002;
+  --color-nv-header: #110104;
+  --color-nv-card: rgba(34, 2, 8, 0.5);
+  --color-nv-card-hover: rgba(34, 2, 8, 0.7);
+  --color-nv-card-full: rgba(34, 2, 8, 1);
+  --color-nv-search: rgba(34, 2, 8, 1);
+  --color-nv-search-hover: rgba(64, 10, 20, 1);
+  --color-nv-kofi: #2b83cc;
+  --color-nv-next: #1e1e1e;
+  --color-nv-border: #4a4c4c;
+  --color-nv-text-gray: #8f8f8f;
+  --color-nv-chapter-text: #d7d7d7;
 }
 
 .dropdown-content {
@@ -81,8 +81,8 @@ Use it to make something cool, have fun, and share what you've learned with othe
   top: calc(100% + 8px);
   left: 0;
   right: 0;
-  background: var(--color-novo-card-full);
-  border: 1px solid var(--color-novo-border);
+  background: var(--color-nv-card-full);
+  border: 1px solid var(--color-nv-border);
   border-radius: 8px;
   padding: 8px 0;
   transform: translateY(-10px);

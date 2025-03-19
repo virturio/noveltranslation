@@ -12,7 +12,7 @@
 </head>
 
 <body <?php body_class('flex flex-col min-h-screen'); ?>>
-    <header class="bg-novo-header fixed top-0 left-0 right-0 h-[64px] px-6 flex items-center justify-center z-10">
+    <header class="bg-nv-header fixed top-0 left-0 right-0 h-[64px] px-6 flex items-center justify-center z-10">
         <div class="max-w-[984px] w-full">
             <a href="/" class="text-xl font-bold">Novo Translation</a>
         </div>

@@ -13,13 +13,13 @@ function enqueue_scripts()
 
 add_action('wp_enqueue_scripts', 'enqueue_scripts');
 
-function add_novo_theme_support()
+function add_nv_theme_support()
 {
     add_theme_support('post-thumbnails');
     add_theme_support('title-tag');
 }
 
-add_action('after_setup_theme', 'add_novo_theme_support');
+add_action('after_setup_theme', 'add_nv_theme_support');
 
 function post_time_ago_format()
 {
@@ -29,8 +29,8 @@ function post_time_ago_format()
 add_filter('the_time', 'post_time_ago_format');
 
 
-require_once THEME_DIR . '/inc/core/class-novo-icons.php';
-require THEME_DIR . '/inc/core/class-novo-html-attributes.php';
+require_once THEME_DIR . '/inc/core/class-nv-icons.php';
+require_once THEME_DIR . '/inc/core/class-nv-html-attributes.php';
 require THEME_DIR . '/inc/core/pagination.php';
 require THEME_DIR . '/inc/template-chapter.php';
 require THEME_DIR . '/inc/template-parts.php';

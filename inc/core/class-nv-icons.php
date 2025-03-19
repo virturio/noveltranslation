@@ -29,7 +29,7 @@ class Novo_Icons
       $output
     );
 
-    return apply_filters('novo_svg_icon', $output, $icon);
+    return apply_filters('nv_svg_icon', $output, $icon);
   }
 }
 

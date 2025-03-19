@@ -6,7 +6,7 @@
  * @param WP_Query $query WordPress query object
  * @return object Pagination data object
  */
-function novo_get_pagination_data($query)
+function nv_get_pagination_data($query)
 {
     $current_page = max(1, get_query_var('page', 1));
     $max_page = $query->max_num_pages;
@@ -39,19 +39,19 @@ function novo_get_pagination_data($query)
  * @param object $pagination_data Pagination data object
  * @return array Array of pagination text elements
  */
-function novo_get_pagination_text($pagination_data)
+function nv_get_pagination_text($pagination_data)
 {
     return [
         'from' => sprintf(
-            __('Showing <span class="font-semibold text-gray-900 dark:text-white">%s</span>', 'novotl'),
+            __('Showing <span class="font-semibold text-gray-900 dark:text-white">%s</span>', domain: DOMAIN),
             esc_html($pagination_data->post_start)
         ),
         'to' => sprintf(
-            __('to <span class="font-semibold text-gray-900 dark:text-white">%s</span>', 'novotl'),
+            __('to <span class="font-semibold text-gray-900 dark:text-white">%s</span>', DOMAIN),
             esc_html($pagination_data->post_end)
         ),
         'total' => sprintf(
-            __('of <span class="font-semibold text-gray-900 dark:text-white">%s</span> Entries', 'novotl'),
+            __('of <span class="font-semibold text-gray-900 dark:text-white">%s</span> Entries', DOMAIN),
             esc_html($pagination_data->total_posts)
         )
     ];
@@ -64,7 +64,7 @@ function novo_get_pagination_text($pagination_data)
  * @param string $direction Button direction ('prev' or 'next')
  * @return string HTML for the pagination button
  */
-function novo_generate_navigation_button($button_data, $direction)
+function nv_generate_navigation_button($button_data, $direction)
 {
     $classes = [
         'flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 hover:bg-gray-900',
@@ -103,7 +103,7 @@ function novo_generate_navigation_button($button_data, $direction)
  * @param object $pagination_data Pagination data object
  * @return array Array of button configurations
  */
-function novo_get_pagination_buttons($pagination_data)
+function nv_get_pagination_buttons($pagination_data)
 {
     return [
         'prev' => [
@@ -135,11 +135,11 @@ function novo_get_pagination_buttons($pagination_data)
  * @param WP_Query $query WordPress query object
  * @return object Pagination data object
  */
-function novo_display_pagination($query)
+function nv_display_pagination($query)
 {
-    $pagination_data = novo_get_pagination_data($query);
-    $pagination_text = novo_get_pagination_text($pagination_data);
-    $pagination_buttons = novo_get_pagination_buttons($pagination_data);
+    $pagination_data = nv_get_pagination_data($query);
+    $pagination_text = nv_get_pagination_text($pagination_data);
+    $pagination_buttons = nv_get_pagination_buttons($pagination_data);
 
     ?>
     <div class="flex flex-col items-center w-full">
@@ -153,7 +153,7 @@ function novo_display_pagination($query)
         <!-- Pagination buttons -->
         <div class="inline-flex justify-between w-full mt-2 xs:mt-0">
             <?php foreach ($pagination_buttons as $direction => $button_data): ?>
-                <?php echo novo_generate_navigation_button($button_data, $direction); ?>
+                <?php echo nv_generate_navigation_button($button_data, $direction); ?>
             <?php endforeach; ?>
         </div>
     </div>
@@ -168,7 +168,7 @@ function novo_display_pagination($query)
  * @param string $direction 'next' or 'prev'
  * @return array|null Navigation data or null if not found
  */
-function novo_get_chapter_navigation($direction)
+function nv_get_chapter_navigation($direction)
 {
     global $post;
 
@@ -221,9 +221,9 @@ function novo_get_chapter_navigation($direction)
  * @param string $direction 'next' or 'prev'
  * @return array Button configuration array
  */
-function novo_get_chapter_navigation_button($direction)
+function nv_get_chapter_navigation_button($direction)
 {
-    $navigation = novo_get_chapter_navigation($direction);
+    $navigation = nv_get_chapter_navigation($direction);
 
     if (!$navigation) {
         return [
@@ -264,15 +264,15 @@ function novo_get_chapter_navigation_button($direction)
  * @param array $pagination_text Optional pagination text to display
  * @return void
  */
-function novo_display_chapter_navigation($pagination_text = [])
+function nv_display_chapter_navigation($pagination_text = [])
 {
-    $prev_button = novo_get_chapter_navigation_button('prev');
-    $next_button = novo_get_chapter_navigation_button('next');
+    $prev_button = nv_get_chapter_navigation_button('prev');
+    $next_button = nv_get_chapter_navigation_button('next');
 
     ?>
     <div class="h-[64px] bg-nv-header border-y w-full border-nv-border flex justify-between items-center">
         <div class="flex w-full justify-between items-center">
-            <?php echo novo_generate_navigation_button($prev_button, 'prev'); ?>
+            <?php echo nv_generate_navigation_button($prev_button, 'prev'); ?>
 
             <?php if (!empty($pagination_text)): ?>
                 <!-- Pagination text -->
@@ -283,7 +283,7 @@ function novo_display_chapter_navigation($pagination_text = [])
                 </span>
             <?php endif; ?>
 
-            <?php echo novo_generate_navigation_button($next_button, 'next'); ?>
+            <?php echo nv_generate_navigation_button($next_button, 'next'); ?>
         </div>
     </div>
     <?php

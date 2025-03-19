@@ -19,11 +19,11 @@ $chapter_title = get_post_meta($chapter_id, '_nv_chapter_title', true);
                 <?php the_title(); ?>
             </h1>
 
-            <?php novo_construct_breadcrumb($chapter_id); ?>
+            <?php nv_construct_breadcrumb($chapter_id); ?>
         </div>
 
         <!-- Top Navigation -->
-        <?php novo_display_chapter_navigation(); ?>
+        <?php nv_display_chapter_navigation(); ?>
 
         <!-- Chapter Content -->
         <article class="content flex flex-col gap-4 p-4 w-full">
@@ -39,7 +39,7 @@ $chapter_title = get_post_meta($chapter_id, '_nv_chapter_title', true);
         </article>
 
         <!-- Bottom Navigation -->
-        <?php novo_display_chapter_navigation(); ?>
+        <?php nv_display_chapter_navigation(); ?>
     </div>
 </main>
 

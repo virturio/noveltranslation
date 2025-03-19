@@ -53,16 +53,17 @@
     --default-mono-font-variation-settings: var(
       --font-mono--font-variation-settings
     );
-    --color-novo-bg: #0a0002;
-    --color-novo-header: #110104;
-    --color-novo-card: rgba(34, 2, 8, 0.5);
-    --color-novo-card-hover: rgba(34, 2, 8, 0.7);
-    --color-novo-card-full: rgba(34, 2, 8, 1);
-    --color-novo-search: rgba(34, 2, 8, 1);
-    --color-novo-search-hover: rgba(64, 10, 20, 1);
-    --color-novo-kofi: #2b83cc;
-    --color-novo-border: #4a4c4c;
-    --color-novo-text-gray: #8f8f8f;
+    --color-nv-bg: #0a0002;
+    --color-nv-header: #110104;
+    --color-nv-card: rgba(34, 2, 8, 0.5);
+    --color-nv-card-hover: rgba(34, 2, 8, 0.7);
+    --color-nv-card-full: rgba(34, 2, 8, 1);
+    --color-nv-search: rgba(34, 2, 8, 1);
+    --color-nv-search-hover: rgba(64, 10, 20, 1);
+    --color-nv-kofi: #2b83cc;
+    --color-nv-border: #4a4c4c;
+    --color-nv-text-gray: #8f8f8f;
+    --color-nv-chapter-text: #d7d7d7;
   }
 }
 @layer base {
@@ -284,9 +285,6 @@
   }
   .mt-2 {
     margin-top: calc(var(--spacing) * 2);
-  }
-  .mt-4 {
-    margin-top: calc(var(--spacing) * 4);
   }
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
@@ -547,14 +545,6 @@
   .rounded-md {
     border-radius: var(--radius-md);
   }
-  .rounded-s {
-    border-start-start-radius: 0.25rem;
-    border-end-start-radius: 0.25rem;
-  }
-  .rounded-e {
-    border-start-end-radius: 0.25rem;
-    border-end-end-radius: 0.25rem;
-  }
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
@@ -582,8 +572,8 @@
   .border-gray-700 {
     border-color: var(--color-gray-700);
   }
-  .border-novo-border {
-    border-color: var(--color-novo-border);
+  .border-nv-border {
+    border-color: var(--color-nv-border);
   }
   .border-transparent {
     border-color: transparent;
@@ -594,20 +584,20 @@
   .bg-gray-800 {
     background-color: var(--color-gray-800);
   }
-  .bg-novo-card {
-    background-color: var(--color-novo-card);
+  .bg-nv-card {
+    background-color: var(--color-nv-card);
   }
-  .bg-novo-card-full {
-    background-color: var(--color-novo-card-full);
+  .bg-nv-card-full {
+    background-color: var(--color-nv-card-full);
   }
-  .bg-novo-header {
-    background-color: var(--color-novo-header);
+  .bg-nv-header {
+    background-color: var(--color-nv-header);
   }
-  .bg-novo-kofi {
-    background-color: var(--color-novo-kofi);
+  .bg-nv-kofi {
+    background-color: var(--color-nv-kofi);
   }
-  .bg-novo-search {
-    background-color: var(--color-novo-search);
+  .bg-nv-search {
+    background-color: var(--color-nv-search);
   }
   .bg-transparent {
     background-color: transparent;
@@ -620,8 +610,8 @@
     --tw-gradient-from: transparent;
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
-  .to-novo-bg {
-    --tw-gradient-to: var(--color-novo-bg);
+  .to-nv-bg {
+    --tw-gradient-to: var(--color-nv-bg);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
   .object-cover {
@@ -757,8 +747,11 @@
   .text-gray-900 {
     color: var(--color-gray-900);
   }
-  .text-novo-text-gray {
-    color: var(--color-novo-text-gray);
+  .text-nv-chapter-text {
+    color: var(--color-nv-chapter-text);
+  }
+  .text-nv-text-gray {
+    color: var(--color-nv-text-gray);
   }
   .text-white {
     color: var(--color-white);
@@ -867,17 +860,17 @@
       }
     }
   }
-  .hover\:bg-novo-card-hover {
+  .hover\:bg-nv-card-hover {
     &:hover {
       @media (hover: hover) {
-        background-color: var(--color-novo-card-hover);
+        background-color: var(--color-nv-card-hover);
       }
     }
   }
-  .hover\:bg-novo-search-hover {
+  .hover\:bg-nv-search-hover {
     &:hover {
       @media (hover: hover) {
-        background-color: var(--color-novo-search-hover);
+        background-color: var(--color-nv-search-hover);
       }
     }
   }
@@ -1101,7 +1094,7 @@
     font-family: "Fira Sans", "sans-serif";
     height: 100vh;
     color: #ffffff;
-    background-color: var(--color-novo-bg);
+    background-color: var(--color-nv-bg);
   }
   a.disabled {
     pointer-events: none !important;
@@ -1136,8 +1129,8 @@
   top: calc(100% + 8px);
   left: 0;
   right: 0;
-  background: var(--color-novo-card-full);
-  border: 1px solid var(--color-novo-border);
+  background: var(--color-nv-card-full);
+  border: 1px solid var(--color-nv-border);
   border-radius: 8px;
   padding: 8px 0;
   transform: translateY(-10px);

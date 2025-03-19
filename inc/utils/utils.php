@@ -22,8 +22,8 @@ function truncate_text($text, $max_length = 35, $separator = '...')
 }
 
 
-if (!function_exists('novo_filter_args')) {
-    function novo_filter_args($args)
+if (!function_exists('nv_filter_args')) {
+    function nv_filter_args($args)
     {
         // Sanitize and validate the date parameter
         $date_query = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
