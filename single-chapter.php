@@ -19,7 +19,7 @@ $chapter_title = get_post_meta($chapter_id, '_nv_chapter_title', true);
                 <?php the_title(); ?>
             </h1>
 
-            <?php nv_construct_breadcrumb($chapter_id); ?>
+            <?php nv_construct_breadcrumb(); ?>
         </div>
 
         <!-- Top Navigation -->

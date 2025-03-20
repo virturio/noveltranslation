@@ -1192,6 +1192,36 @@
     height: 18px !important;
   }
 }
+.social-button {
+  transition: all 0.3s ease;
+}
+.social-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.chapter-item {
+  transition: all 0.2s ease;
+}
+.chapter-item:hover {
+  background-color: rgba(74, 76, 76, 0.1);
+}
+.read-button {
+  transition: all 0.3s ease;
+}
+.read-button:hover {
+  background-color: var(--nvutton-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(136, 7, 7, 0.3);
+}
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;
