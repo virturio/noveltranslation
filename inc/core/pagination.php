@@ -43,7 +43,7 @@ function nv_get_pagination_text($pagination_data)
 {
     return [
         'from' => sprintf(
-            __('Showing <span class="font-semibold text-gray-900 dark:text-white">%s</span>', domain: DOMAIN),
+            __('Showing <span class="font-semibold text-gray-900 dark:text-white">%s</span>', DOMAIN),
             esc_html($pagination_data->post_start)
         ),
         'to' => sprintf(
