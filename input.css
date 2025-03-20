@@ -29,7 +29,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
   }
 
   a:hover {
-    text-decoration: underline !important;
+    text-decoration: underline;
     /* color: #155dfc !important; */
   }
 }
@@ -47,15 +47,16 @@ Use it to make something cool, have fun, and share what you've learned with othe
   --color-nv-border: #4a4c4c;
   --color-nv-text-gray: #8f8f8f;
   --color-nv-chapter-text: #d7d7d7;
-  --nv-tag: #202324;
-  --nv-ext-gray: #8f8f8f;
-  --nv-breadcrumb: #cdcdcd;
-  --nv-facebook: #0866ff;
-  --nv-whatsapp: #25d366;
-  --nv-telegram: #23a1dd;
-  --nv-pinterest: #e60019;
-  --nv-chapter-odd: #201013;
-  --nv-chapter-even: #1e1e1e;
+  --color-nv-tag: #202324;
+  --color-nv-text-gray: #8f8f8f;
+  --color-nv-breadcrumb: #cdcdcd;
+  --color-nv-facebook: #0866ff;
+  --color-nv-whatsapp: #25d366;
+  --color-nv-telegram: #23a1dd;
+  --color-nv-x: #000000;
+  --color-nv-pinterest: #e60019;
+  --color-nv-chapter-odd: #1e0c0f;
+  --color-nv-chapter-even: #110104;
 }
 
 .dropdown-content {
@@ -180,6 +181,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 .social-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
 }
 
 .chapter-item {
@@ -188,16 +190,6 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
 .chapter-item:hover {
   background-color: rgba(74, 76, 76, 0.1);
-}
-
-.read-button {
-  transition: all 0.3s ease;
-}
-
-.read-button:hover {
-  background-color: var(--nvutton-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(136, 7, 7, 0.3);
 }
 
 /* No Scrollbar */
@@ -212,4 +204,35 @@ Use it to make something cool, have fun, and share what you've learned with othe
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+}
+
+.series-synopsis {
+  --max-lines: 5;
+  --line-height: 1.5;
+  --font-size: 1em;
+
+  max-height: calc(var(--max-lines) * var(--line-height) * var(--font-size));
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  overflow: hidden;
+  position: relative;
+}
+
+.series-synopsis:has(+ .show-more-btn:not(:checked))::before {
+  content: "";
+  position: absolute;
+  height: calc(var(--line-height) * var(--font-size));
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to bottom, transparent, var(--color-nv-bg));
+  pointer-events: none;
+}
+
+.show-more-btn:checked::before {
+  content: "Show less";
+}
+
+.series-synopsis:has(+ .show-more-btn:checked) {
+  max-height: none;
 }

@@ -56,3 +56,11 @@ if (!function_exists('nv_filter_args')) {
         return $args;
     }
 }
+
+if (!function_exists('nv_get_current_url')) {
+    function nv_get_current_url()
+    {
+        global $wp;
+        return home_url($wp->request);
+    }
+}

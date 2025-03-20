@@ -33,32 +33,7 @@ if (has_post_thumbnail()): ?>
         </div>
 
         <!-- Chapter List -->
-        <div class="space-y-4 flex flex-col gap-4 items-center justify-center">
-            <?php
-            $paged = get_query_var('page') ? absint(get_query_var('page')) : 1;
-            $args = array(
-                'post_type' => 'chapter',
-                'posts_per_page' => 5,
-                'orderby' => 'date',
-                'order' => 'DESC',
-                'paged' => $paged,
-            );
-
-            $args = nv_filter_args($args);
-            $query = new WP_Query($args);
-
-            if ($query->have_posts()):
-                while ($query->have_posts()):
-                    $query->the_post(); ?>
-                    <?php the_chapters(); ?>
-                <?php endwhile;
-            endif;
-
-            nv_display_pagination($query);
-            wp_reset_postdata();
-            ?>
-
-        </div>
+        <?php the_archive_chapters(); ?>
     </div>
 </main>
 

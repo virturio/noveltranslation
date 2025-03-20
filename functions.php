@@ -31,9 +31,10 @@ add_filter('the_time', 'post_time_ago_format');
 
 require_once THEME_DIR . '/inc/core/class-nv-icons.php';
 require_once THEME_DIR . '/inc/core/class-nv-html-attributes.php';
-require THEME_DIR . '/inc/core/pagination.php';
-require THEME_DIR . '/inc/template-chapter.php';
-require THEME_DIR . '/inc/template-parts.php';
+require_once THEME_DIR . '/inc/core/pagination.php';
+require_once THEME_DIR . '/inc/template-chapter.php';
+require_once THEME_DIR . '/inc/template-parts.php';
+require_once THEME_DIR . '/inc/template-series.php';
 
 require THEME_DIR . '/inc/rest/search-endpoint.php';
 require THEME_DIR . '/inc/utils/utils.php';

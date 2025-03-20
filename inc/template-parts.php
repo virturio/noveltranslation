@@ -347,3 +347,4 @@ if (!function_exists('nv_get_search_loading_indicator')) {
     }
 }
 
+
