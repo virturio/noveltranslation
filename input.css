@@ -29,7 +29,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
   }
 
   a:hover {
-    text-decoration: underline !important;
+    text-decoration: underline;
     /* color: #155dfc !important; */
   }
 }
@@ -47,6 +47,16 @@ Use it to make something cool, have fun, and share what you've learned with othe
   --color-nv-border: #4a4c4c;
   --color-nv-text-gray: #8f8f8f;
   --color-nv-chapter-text: #d7d7d7;
+  --color-nv-tag: #202324;
+  --color-nv-text-gray: #8f8f8f;
+  --color-nv-breadcrumb: #cdcdcd;
+  --color-nv-facebook: #0866ff;
+  --color-nv-whatsapp: #25d366;
+  --color-nv-telegram: #23a1dd;
+  --color-nv-x: #000000;
+  --color-nv-pinterest: #e60019;
+  --color-nv-chapter-odd: #1e0c0f;
+  --color-nv-chapter-even: #110104;
 }
 
 .dropdown-content {
@@ -161,4 +171,68 @@ Use it to make something cool, have fun, and share what you've learned with othe
   .kofi-cup {
     height: 18px !important;
   }
+}
+
+/* Hover and animation effects */
+.social-button {
+  transition: all 0.3s ease;
+}
+
+.social-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+}
+
+.chapter-item {
+  transition: all 0.2s ease;
+}
+
+.chapter-item:hover {
+  background-color: rgba(74, 76, 76, 0.1);
+}
+
+/* No Scrollbar */
+/* add the code bellow */
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+.series-synopsis {
+  --max-lines: 5;
+  --line-height: 1.5;
+  --font-size: 1em;
+
+  max-height: calc(var(--max-lines) * var(--line-height) * var(--font-size));
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  overflow: hidden;
+  position: relative;
+}
+
+.series-synopsis:has(+ .show-more-btn:not(:checked))::before {
+  content: "";
+  position: absolute;
+  height: calc(var(--line-height) * var(--font-size));
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to bottom, transparent, var(--color-nv-bg));
+  pointer-events: none;
+}
+
+.show-more-btn:checked::before {
+  content: "Show less";
+}
+
+.series-synopsis:has(+ .show-more-btn:checked) {
+  max-height: none;
 }

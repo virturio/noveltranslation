@@ -13,13 +13,11 @@ if (!function_exists('nv_get_breadcrumb_items')) {
      * @param int $post_id The post ID
      * @return array Array of breadcrumb items
      */
-    function nv_get_breadcrumb_items($post_id)
+    function nv_get_breadcrumb_items()
     {
-        $series_name = get_post_meta($post_id, '_nv_related_series_name', true);
-        $series_slug = sanitize_title($series_name);
-        $chapter_title = get_post_meta($post_id, '_nv_chapter_title', true);
+        global $post;
 
-        return [
+        $items = [
             [
                 'text' => 'Home',
                 'url' => '/',
@@ -29,17 +27,38 @@ if (!function_exists('nv_get_breadcrumb_items')) {
                 'text' => 'Series',
                 'url' => '/series'
             ],
-            [
-                'text' => $series_name,
-                'url' => "/series/{$series_slug}",
-                'truncate' => true
-            ],
-            [
-                'text' => $chapter_title,
+
+        ];
+
+        if ($post->post_type === 'series') {
+            $post_title = get_the_title($post->ID);
+            $items[] = [
+                'text' => $post_title,
                 'truncate' => true,
                 'current' => true
-            ]
-        ];
+            ];
+        }
+
+        if ($post->post_type === 'chapter') {
+            $series_name = get_post_meta($post->ID, '_nv_related_series_name', true);
+            $series_slug = sanitize_title($series_name);
+            $chapter_title = get_post_meta($post->ID, '_nv_chapter_title', true);
+            array_push(
+                $items,
+                [
+                    'text' => $series_name,
+                    'url' => "/series/{$series_slug}",
+                    'truncate' => true
+                ],
+                [
+                    'text' => $chapter_title,
+                    'truncate' => true,
+                    'current' => true
+                ]
+            );
+        }
+
+        return $items;
     }
 }
 
@@ -75,9 +94,9 @@ if (!function_exists('nv_construct_breadcrumb')) {
      * @param int $post_id The post ID
      * @return void
      */
-    function nv_construct_breadcrumb($post_id)
+    function nv_construct_breadcrumb()
     {
-        $items = nv_get_breadcrumb_items($post_id);
+        $items = nv_get_breadcrumb_items();
         ?>
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse flex-wrap">
@@ -327,4 +346,5 @@ if (!function_exists('nv_get_search_loading_indicator')) {
         </div>';
     }
 }
+
 
