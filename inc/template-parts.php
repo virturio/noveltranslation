@@ -21,7 +21,8 @@ if (!function_exists('nv_get_breadcrumb_items')) {
             [
                 'text' => 'Home',
                 'url' => '/',
-                'icon' => 'home'
+                'icon' => 'home',
+                'icon_attr' => ['class' => 'w-3 h-3', 'aria-hidden' => 'true']
             ],
             [
                 'text' => 'Series',
@@ -62,31 +63,6 @@ if (!function_exists('nv_get_breadcrumb_items')) {
     }
 }
 
-if (!function_exists('nv_get_breadcrumb_icon')) {
-    /**
-     * Get breadcrumb icon HTML
-     * 
-     * @param string $type Icon type (separator or home)
-     * @return string Icon HTML
-     */
-    function nv_get_breadcrumb_icon($type)
-    {
-        if ($type === 'separator') {
-            return '<svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
-            </svg>';
-        }
-
-        if ($type === 'home') {
-            return '<svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
-            </svg>';
-        }
-
-        return '';
-    }
-}
-
 if (!function_exists('nv_construct_breadcrumb')) {
     /**
      * Generate breadcrumb navigation for chapter pages
@@ -97,6 +73,7 @@ if (!function_exists('nv_construct_breadcrumb')) {
     function nv_construct_breadcrumb()
     {
         $items = nv_get_breadcrumb_items();
+        $separator_icon = nv_get_icon('separator', ['class' => 'rtl:rotate-180 w-3 h-3 text-gray-400 mx-1', 'aria-hidden' => 'true', 'viewBox' => '0 0 6 10', 'fill' => "none"]);
         ?>
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse flex-wrap">
@@ -104,11 +81,11 @@ if (!function_exists('nv_construct_breadcrumb')) {
                     <li <?php echo isset($item['current']) ? 'aria-current="page"' : ''; ?>>
                         <div class="flex items-center">
                             <?php if ($index > 0): ?>
-                                <?php echo nv_get_breadcrumb_icon('separator'); ?>
+                                <?php echo $separator_icon; ?>
                             <?php endif; ?>
 
                             <?php if (isset($item['icon'])): ?>
-                                <?php echo nv_get_breadcrumb_icon('home'); ?>
+                                <?php echo nv_get_icon($item['icon'], $item['icon_attr']); ?>
                             <?php endif; ?>
 
                             <?php if (isset($item['url'])): ?>
@@ -153,8 +130,14 @@ if (!function_exists('nv_get_dropdown_icons')) {
         }
 
         return [
-            'leading' => $leading_icon,
-            'trailing' => $trailing_icon
+            'leading' => [
+                'icon' => $leading_icon,
+                'attr' => ['aria-hidden' => 'true']
+            ],
+            'trailing' => [
+                'icon' => $trailing_icon,
+                'attr' => ['class' => 'w-5 h-5 ml-2 max-md:hidden']
+            ]
         ];
     }
 }
@@ -188,8 +171,10 @@ if (!function_exists('nv_dropdown_handler')) {
     {
         $icons = nv_get_dropdown_icons($context);
         ?>
-        <button <?php nv_do_attr('filter-button'); ?>>
-            <?php nv_button_content(
+        <button
+            class="filter-button flex items-center justify-between px-4 h-full rounded-lg bg-nv-card border border-nv-border focus:outline-none max-md:min-w-[40px] max-md:px-0 max-md:py-[10px] max-lg:min-w-[44px] max-lg:justify-center"
+            onclick="filterSelect(event)">
+            <?php nv_filter_button_content(
                 sanitize_text_field($_GET[$context] ?? $context),
                 $icons['leading'],
                 $icons['trailing']
@@ -210,9 +195,10 @@ if (!function_exists('nv_dropdown_content')) {
     {
         $contents = nv_dropdown_allowed_contents($context);
         ?>
-        <div <?php nv_do_attr('dropdown-content'); ?>>
+        <div
+            class="dropdown-content absolute top-[calc(100%+4px)] left-0 w-full text-center bg-nv-card-full border border-nv-border rounded-lg overflow-hidden z-10">
             <?php foreach ($contents as $content): ?>
-                <div <?php nv_do_attr('dropdown-item'); ?>>
+                <div class="dropdown-item px-4 py-2 cursor-pointer text-[14px] font-semibold">
                     <?php echo esc_html($content); ?>
                 </div>
             <?php endforeach; ?>
@@ -239,7 +225,7 @@ if (!function_exists('nv_dropdown_allowed_contents')) {
     }
 }
 
-if (!function_exists('nv_button_content')) {
+if (!function_exists('nv_filter_button_content')) {
     /**
      * Generate button content with optional icons
      * 
@@ -248,23 +234,23 @@ if (!function_exists('nv_button_content')) {
      * @param string|null $trailing_icon Optional trailing icon
      * @return void
      */
-    function nv_button_content($context, $leading_icon = null, $trailing_icon = null)
+    function nv_filter_button_content($context, $leading_icon = null, $trailing_icon = null)
     {
         $formatted_text = ucwords(str_replace('-', ' ', $context));
         $content = '';
 
         if ($leading_icon) {
-            $content .= Novo_Icons::get_icon($leading_icon);
+            $content .= nv_get_icon($leading_icon['icon'], $leading_icon['attr']);
         }
 
         $content .= sprintf(
-            '<span %s>%s</span>',
-            nv_get_attr('filter-text'),
+            '<span class="%s">%s</span>',
+            'filter-text max-md:hidden text-[14px] font-semibold selected-value ml-2',
             esc_html($formatted_text)
         );
 
         if ($trailing_icon) {
-            $content .= Novo_Icons::get_icon($trailing_icon);
+            $content .= nv_get_icon($trailing_icon['icon'], $trailing_icon['attr']);
         }
 
         echo $content;
@@ -298,12 +284,14 @@ if (!function_exists('nv_construct_searchbar')) {
      */
     function nv_construct_searchbar()
     {
+        $search_icon_attr = ['class' => 'transition-all w-6 h-6 text-nv-text-gray duration-300 ease group-hover:text-white group-hover:scale-110 group-focus-within:text-white group-focus-within:scale-110'];
+        $search_icon = nv_get_icon('search', $search_icon_attr);
         ?>
         <div class="flex-1 mx-2 h-[44px]">
             <div class="search-container h-full relative transition-all duration-300 ease">
                 <div
                     class="search-bar group flex items-center justify-center bg-nv-search rounded-lg px-5 h-full gap-4 transition-all duration-300 ease border border-transparent hover:bg-nv-search-hover hover:shadow-lg focus-within:border-yellow-500 focus-within:border-2 focus-within:shadow-lg">
-                    <?php echo nv_get_search_icon(); ?>
+                    <?php echo $search_icon; ?>
                     <input type="text" id="chapter-search" placeholder="Search posts"
                         class="search-input bg-transparent text-[14px] font-semibold text-white focus:outline-none w-full"
                         autocomplete="off" />
@@ -316,20 +304,6 @@ if (!function_exists('nv_construct_searchbar')) {
     }
 }
 
-if (!function_exists('nv_get_search_icon')) {
-    /**
-     * Get search icon HTML
-     * 
-     * @return string Search icon HTML
-     */
-    function nv_get_search_icon()
-    {
-        return '<svg class="h-6 text-nv-text-gray search-icon transition-all duration-300 ease group-hover:text-white group-hover:scale-110 group-focus-within:text-white group-focus-within:scale-110"
-            fill="currentColor" viewBox="0 0 24 24">
-            <path d="M21.71 20.29l-5.01-5.01C17.54 13.68 18 11.91 18 10c0-4.41-3.59-8-8-8S2 5.59 2 10s3.59 8 8 8c1.91 0 3.68-.46 5.28-1.3l5.01 5.01c.39.39 1.02.39 1.41 0l1.41-1.41c.39-.39.39-1.02 0-1.41zM10 16c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z" />
-        </svg>';
-    }
-}
 
 if (!function_exists('nv_get_search_loading_indicator')) {
     /**

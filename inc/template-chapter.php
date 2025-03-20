@@ -3,13 +3,11 @@
 function nv_the_chapters_query()
 {
     global $post;
-
-    $paged = is_main_query() ? 'paged' : 'page';
-    $paged = get_query_var($paged) ? absint(get_query_var($paged)) : 1;
+    $paged = get_query_var('page') ? absint(get_query_var('page')) : 1;
 
     $args = array(
         'post_type' => 'chapter',
-        'posts_per_page' => 5,
+        'posts_per_page' => 10,
         'orderby' => 'date',
         'order' => 'DESC',
         'paged' => $paged,

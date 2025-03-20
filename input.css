@@ -64,6 +64,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
+  min-width: 120px;
 }
 
 .dropdown.active .dropdown-content {
@@ -77,11 +78,11 @@ Use it to make something cool, have fun, and share what you've learned with othe
   background-color: #380913;
 }
 
-.chevron {
+.icon-chevron-down {
   transition: transform 0.3s ease;
 }
 
-.dropdown.active .chevron {
+.dropdown.active .icon-chevron-down {
   transform: rotate(180deg);
 }
 
