@@ -103,10 +103,10 @@ function nv_generate_navigation_button($button_data, $direction)
  * @param object $pagination_data Pagination data object
  * @return array Array of button configurations
  */
-function nv_get_pagination_buttons($pagination_data)
+function nv_get_pagination_button_data($direction, $pagination_data)
 {
-    return [
-        'prev' => [
+    if ($direction === 'prev') {
+        return [
             'url' => $pagination_data->prev_url ?? '#',
             'disabled' => !$pagination_data->prev_url,
             'icon' => [
@@ -115,16 +115,17 @@ function nv_get_pagination_buttons($pagination_data)
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4" />
                 </svg>'
             ]
-        ],
-        'next' => [
-            'url' => $pagination_data->next_url ?? '#',
-            'disabled' => !$pagination_data->next_url,
-            'icon' => [
-                'position' => 'after',
-                'svg' => '<svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+        ];
+    }
+
+    return [
+        'url' => $pagination_data->next_url ?? '#',
+        'disabled' => !$pagination_data->next_url,
+        'icon' => [
+            'position' => 'after',
+            'svg' => '<svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                 </svg>'
-            ]
         ]
     ];
 }
@@ -139,22 +140,23 @@ function nv_display_pagination($query)
 {
     $pagination_data = nv_get_pagination_data($query);
     $pagination_text = nv_get_pagination_text($pagination_data);
-    $pagination_buttons = nv_get_pagination_buttons($pagination_data);
+    $prev_button = nv_get_pagination_button_data('prev', $pagination_data);
+    $next_button = nv_get_pagination_button_data('next', $pagination_data);
 
     ?>
     <div class="flex flex-col items-center w-full">
-        <!-- Help text -->
-        <span class="text-sm text-gray-700 dark:text-gray-400 flex-wrap">
-            <?php echo $pagination_text['from']; ?>
-            <?php echo $pagination_text['to']; ?>
-            <?php echo $pagination_text['total']; ?>
-        </span>
+
 
         <!-- Pagination buttons -->
-        <div class="inline-flex justify-between w-full mt-2 xs:mt-0">
-            <?php foreach ($pagination_buttons as $direction => $button_data): ?>
-                <?php echo nv_generate_navigation_button($button_data, $direction); ?>
-            <?php endforeach; ?>
+        <div class="inline-flex justify-between items-center w-full mt-2 xs:mt-0 gap-4">
+            <?php echo nv_generate_navigation_button($prev_button, 'prev'); ?>
+            <!-- Help text -->
+            <span class="text-sm text-gray-700 dark:text-gray-400 flex-wrap text-center">
+                <?php echo $pagination_text['from']; ?>
+                <?php echo $pagination_text['to']; ?>
+                <?php echo $pagination_text['total']; ?>
+            </span>
+            <?php echo nv_generate_navigation_button($next_button, 'next'); ?>
         </div>
     </div>
     <?php
@@ -271,7 +273,7 @@ function nv_display_chapter_navigation($pagination_text = [])
 
     ?>
     <div class="h-[64px] bg-nv-header border-y w-full border-nv-border flex justify-between items-center">
-        <div class="flex w-full justify-between items-center">
+        <div class="flex w-full justify-between items-center px-4">
             <?php echo nv_generate_navigation_button($prev_button, 'prev'); ?>
 
             <?php if (!empty($pagination_text)): ?>
