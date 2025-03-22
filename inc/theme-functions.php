@@ -6,3 +6,4 @@ if (!function_exists('nv_get_icon')) {
         return Novo_Icons::get_icon($icon, $attr);
     }
 }
+

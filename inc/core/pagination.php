@@ -67,8 +67,7 @@ function nv_get_pagination_text($pagination_data)
 function nv_generate_navigation_button($button_data, $direction)
 {
     $classes = [
-        'flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 hover:bg-gray-900',
-        'dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white',
+        'flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-nv-nav-btn hover:bg-nv-nav-btn-hover no-underline',
         $button_data['disabled'] ? 'disabled' : '',
         'border-0 border-s border-gray-700 rounded-md'
     ];
@@ -272,8 +271,8 @@ function nv_display_chapter_navigation($pagination_text = [])
     $next_button = nv_get_chapter_navigation_button('next');
 
     ?>
-    <div class="h-[64px] bg-nv-header border-y w-full border-nv-border flex justify-between items-center">
-        <div class="flex w-full justify-between items-center px-4">
+    <div class="h-[64px] border-y border-nv-border flex justify-between items-center">
+        <div class="flex w-full justify-between items-center">
             <?php echo nv_generate_navigation_button($prev_button, 'prev'); ?>
 
             <?php if (!empty($pagination_text)): ?>

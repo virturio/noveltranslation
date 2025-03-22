@@ -1,3 +1,5 @@
+</div>
+</main>
 <!-- Footer -->
 <footer class="bg-nv-header py-7 px-20">
     <div class="container mx-auto flex flex-col items-center text-center justify-center gap-6 max-w-[400px]">

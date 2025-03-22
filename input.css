@@ -30,21 +30,40 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
   a:hover {
     text-decoration: underline;
-    /* color: #155dfc !important; */
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  p {
+    line-height: 1.8;
+    color: var(--color-nv-p);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.3;
   }
 }
 
 @theme {
-  --color-nv-bg: #0a0002;
-  --color-nv-header: #1b0408;
-  --color-nv-card: rgba(34, 2, 8, 0.5);
-  --color-nv-card-hover: rgba(34, 2, 8, 0.7);
-  --color-nv-card-full: rgba(34, 2, 8, 1);
-  --color-nv-search: rgba(34, 2, 8, 1);
-  --color-nv-search-hover: rgba(64, 10, 20, 1);
+  --color-nv-bg: #1e1e1e;
+  --color-nv-header: #202324;
+  --color-nv-card: rgb(32, 35, 36);
+  --color-nv-card-hover: rgb(43, 46, 47);
+  --color-nv-card-full: rgba(32, 35, 36, 1);
   --color-nv-kofi: #2b83cc;
   --color-nv-next: #1e1e1e;
   --color-nv-border: #4a4c4c;
+  --color-nv-p: #d7d7d7;
+  --color-nv-nav-btn: #2b83cc;
+  --color-nv-nav-btn-hover: #266598;
   --color-nv-text-gray: #8f8f8f;
   --color-nv-chapter-text: #d7d7d7;
   --color-nv-tag: #202324;
@@ -55,8 +74,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
   --color-nv-telegram: #23a1dd;
   --color-nv-x: #000000;
   --color-nv-pinterest: #e60019;
-  --color-nv-chapter-odd: #1e0c0f;
-  --color-nv-chapter-even: #110104;
+  --color-nv-chapter-odd: rgb(30, 30, 30);
 }
 
 .dropdown-content {
@@ -75,7 +93,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
 .dropdown-button:hover,
 .dropdown-item:hover {
-  background-color: #380913;
+  background-color: var(--color-nv-card-hover);
 }
 
 .icon-chevron-down {
@@ -92,7 +110,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
   top: calc(100% + 8px);
   left: 0;
   right: 0;
-  background: var(--color-nv-card-full);
+  background: var(--color-nv-card);
   border: 1px solid var(--color-nv-border);
   border-radius: 8px;
   padding: 8px 0;
@@ -113,10 +131,11 @@ Use it to make something cool, have fun, and share what you've learned with othe
   padding: 8px 16px;
   transition: all 0.2s ease;
   cursor: pointer;
+  border-bottom: 1px solid var(--color-nv-border);
 }
 
 .search-result-item:hover {
-  background-color: rgba(74, 76, 76, 0.3);
+  background-color: var(--color-nv-card-hover);
 }
 
 /* Ko-fi Button Styles */
@@ -153,8 +172,6 @@ Use it to make something cool, have fun, and share what you've learned with othe
 /* Responsive Ko-fi button */
 @media (max-width: 1024px) {
   .kofi-button {
-    /* padding: 0 !important; */
-    /* width: 44px; */
     justify-content: center;
   }
 

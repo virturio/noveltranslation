@@ -172,7 +172,7 @@ if (!function_exists('nv_dropdown_handler')) {
         $icons = nv_get_dropdown_icons($context);
         ?>
         <button
-            class="filter-button flex items-center justify-between px-4 h-full rounded-lg bg-nv-card border border-nv-border focus:outline-none max-md:min-w-[40px] max-md:px-0 max-md:py-[10px] max-lg:min-w-[44px] max-lg:justify-center"
+            class="filter-button flex items-center justify-between px-4 h-full rounded-lg hover:bg-nv-card-hover cursor-pointer bg-nv-card border border-nv-border focus:outline-none max-md:min-w-[40px] max-md:px-0 max-md:py-[10px] max-lg:min-w-[44px] max-lg:justify-center"
             onclick="filterSelect(event)">
             <?php nv_filter_button_content(
                 sanitize_text_field($_GET[$context] ?? $context),
@@ -196,7 +196,7 @@ if (!function_exists('nv_dropdown_content')) {
         $contents = nv_dropdown_allowed_contents($context);
         ?>
         <div
-            class="dropdown-content absolute top-[calc(100%+4px)] left-0 w-full text-center bg-nv-card-full border border-nv-border rounded-lg overflow-hidden z-10">
+            class="dropdown-content absolute top-[calc(100%+4px)] left-0 w-full text-center bg-nv-card border border-nv-border rounded-lg overflow-hidden z-10">
             <?php foreach ($contents as $content): ?>
                 <div class="dropdown-item px-4 py-2 cursor-pointer text-[14px] font-semibold">
                     <?php echo esc_html($content); ?>
@@ -290,14 +290,14 @@ if (!function_exists('nv_construct_searchbar')) {
         <div class="flex-1 mx-2 h-[44px]">
             <div class="search-container h-full relative transition-all duration-300 ease">
                 <div
-                    class="search-bar group flex items-center justify-center bg-nv-search rounded-lg px-5 h-full gap-4 transition-all duration-300 ease border border-transparent hover:bg-nv-search-hover hover:shadow-lg focus-within:border-yellow-500 focus-within:border-2 focus-within:shadow-lg">
+                    class="search-bar group flex items-center justify-center bg-nv-card rounded-lg px-5 h-full gap-4 transition-all duration-300 ease border border-transparent hover:bg-nv-card-hover hover:shadow-lg focus-within:border-yellow-500 focus-within:border-2 focus-within:shadow-lg">
                     <?php echo $search_icon; ?>
                     <input type="text" id="chapter-search" placeholder="Search posts"
-                        class="search-input bg-transparent text-[14px] font-semibold text-white focus:outline-none w-full"
+                        class="search-input bg-transparent text-[14px] font-semibold text-white focus:outline-none w-full "
                         autocomplete="off" />
                 </div>
                 <?php echo nv_get_search_loading_indicator(); ?>
-                <div id="search-results"></div>
+                <div id="search-results" class="bg-nv-card hover:bg-nv-card-hover"></div>
             </div>
         </div>
         <?php
@@ -313,7 +313,7 @@ if (!function_exists('nv_get_search_loading_indicator')) {
      */
     function nv_get_search_loading_indicator()
     {
-        return '<div id="search-loading" class="hidden absolute top-full left-0 right-0 mt-2 bg-nv-search rounded-lg p-4 border border-nv-border">
+        return '<div id="search-loading" class="hidden absolute top-full left-0 right-0 mt-2 bg-nv-card rounded-lg p-4 border border-nv-border">
             <div class="flex items-center justify-center">
                 <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-yellow-500"></div>
             </div>

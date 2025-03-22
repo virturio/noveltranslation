@@ -76,7 +76,7 @@ if (!function_exists('nv_the_series_chapters')) {
         $query = nv_the_chapters_query();
         ?>
         <div
-            class="chapters-container space-y-1 max-h-[500px] overflow-y-scroll no-scrollbar [&>*:nth-child(odd)]:bg-nv-chapter-odd [&>*:nth-child(even)]:bg-nv-chapter-even"> <?php
+            class="chapters-container space-y-1 max-h-[500px] overflow-y-scroll no-scrollbar [&>*:nth-child(odd)]:bg-nv-chapter-odd [&>*:nth-child(even)]:bg-transparent"> <?php
             if ($query->have_posts()):
                 while ($query->have_posts()):
                     $query->the_post();
@@ -92,10 +92,10 @@ if (!function_exists('nv_the_series_chapter')) {
     function nv_the_series_chapter()
     {
         ?>
-        <div class="chapter-item px-3 py-4 flex justify-between items-center">
+        <div class="chapter-item px-3 py-4 flex justify-between items-center border-b border-nv-border">
             <a href="<?php echo get_the_permalink(); ?>"
                 class="text-md"><?php echo get_post_meta(get_the_ID(), '_nv_chapter_title', true) ?></a>
-            <span class="text-xs text-nvext-gray"><?php the_time() ?></span>
+            <span class="text-xs text-nv-text-gray font-semibold"><?php the_time() ?></span>
         </div>
         <?php
     }
