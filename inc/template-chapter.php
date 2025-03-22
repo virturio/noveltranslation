@@ -28,7 +28,7 @@ if (!function_exists('the_archive_chapters')) {
     function the_archive_chapters()
     {
         ?>
-        <div class="space-y-4 flex flex-col gap-4 items-center justify-center">
+        <div class="flex flex-col gap-4 items-center justify-center">
             <?php
             $query = nv_the_chapters_query();
 
@@ -53,7 +53,7 @@ if (!function_exists('the_archive_chapter')) {
     {
         ?>
         <div
-            class="bg-nv-card rounded-2xl px-8 py-6 space-y-2 cursor-pointer hover:bg-nv-card-hover transition-all duration-200">
+            class="bg-nv-card rounded-lg px-8 py-6 space-y-2 cursor-pointer hover:bg-nv-card-hover transition-all duration-200">
             <a href="<?php echo get_the_permalink(); ?>">
                 <h3 class="text-xl font-semibold line-clamp-2">
                     <?php echo get_the_title(); ?>

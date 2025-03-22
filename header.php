@@ -19,5 +19,5 @@
             <a href="/" class="text-xl font-bold no-underline">Novo Translation</a>
         </div>
     </header>
-    <main class="w-full flex items-center justify-center px-6 mt-[64px]">
+    <main class="w-full flex items-start justify-center px-6 mt-[64px] flex-grow">
         <div class="max-w-[984px] py-8 w-full">

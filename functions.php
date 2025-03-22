@@ -4,7 +4,9 @@ define("THEME_DIR_URI", get_template_directory_uri());
 define("THEME_DIR", get_template_directory());
 define("VERSION", '1.0.0');
 define("PREFIX", "_nv_");
-define("DOMAIN", 'novel-translation');
+if (!defined("DOMAIN")) {
+    define("DOMAIN", 'novel-translation');
+}
 
 function enqueue_scripts()
 {
@@ -20,8 +22,6 @@ function add_nv_theme_support()
 {
     add_theme_support('post-thumbnails');
     add_theme_support('title-tag');
-    add_theme_support('wp-block-styles');
-    add_theme_support('align-wide');
 }
 
 add_action('after_setup_theme', 'add_nv_theme_support');

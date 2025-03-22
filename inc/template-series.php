@@ -223,7 +223,7 @@ if (!function_exists('nv_construct_series_details')) {
                             Posted at: <span class="font-light"><?php echo esc_html($details['post_date']); ?></span>
                         </p>
                         <p class="text-base font-semibold tracking-wide">
-                            <?php echo do_shortcode('[post-views]', 120); ?>
+                            Views: <span class="font-light">223</span>
                         </p>
                     </div>
                 </div>
