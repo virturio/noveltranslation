@@ -67,9 +67,9 @@ function nv_get_pagination_text($pagination_data)
 function nv_generate_navigation_button($button_data, $direction)
 {
     $classes = [
-        'flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-nv-nav-btn hover:bg-nv-nav-btn-hover no-underline',
+        'flex items-center justify-center px-4 h-10 text-base font-medium text-white hover:text-nv-nav-btn no-underline',
         $button_data['disabled'] ? 'disabled' : '',
-        'border-0 border-s border-gray-700 rounded-md'
+        'rounded-md'
     ];
 
     $output = sprintf(
@@ -271,17 +271,21 @@ function nv_display_chapter_navigation($pagination_text = [])
     $next_button = nv_get_chapter_navigation_button('next');
 
     ?>
-    <div class="h-[64px] border-y border-nv-border flex justify-between items-center">
+    <div class="h-[64px] flex justify-between items-center">
         <div class="flex w-full justify-between items-center">
             <?php echo nv_generate_navigation_button($prev_button, 'prev'); ?>
 
             <?php if (!empty($pagination_text)): ?>
                 <!-- Pagination text -->
-                <span class="text-sm text-gray-700 dark:text-gray-400 flex-wrap">
+                <span class="text-sm text-gray-700 flex-wrap">
                     <?php echo $pagination_text['from']; ?>
                     <?php echo $pagination_text['to']; ?>
                     <?php echo $pagination_text['total']; ?>
                 </span>
+            <?php else: ?>
+                <div class="w-full h-[1px] bg-nv-border">
+
+                </div>
             <?php endif; ?>
 
             <?php echo nv_generate_navigation_button($next_button, 'next'); ?>

@@ -1,18 +1,3 @@
-/*
-Theme Name: Novel Translation
-Author: Muhammad Rio
-Description: Novel Translation Theme
-Version: 1.0
-Requires at least: 7.0
-Tested up to: 5.4
-Requires PHP: 7.0
-License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: noveltranslation
-This theme, like WordPress, is licensed under the GPL.
-Use it to make something cool, have fun, and share what you've learned with others.
-*/
-
 @import "tailwindcss";
 @layer base {
   html {
@@ -20,6 +5,10 @@ Use it to make something cool, have fun, and share what you've learned with othe
     height: 100vh;
     color: #ffffff;
     background-color: var(--color-nv-bg);
+  }
+
+  body * {
+    scroll-margin-top: 150px;
   }
 
   a.disabled {
@@ -31,14 +20,8 @@ Use it to make something cool, have fun, and share what you've learned with othe
     text-decoration: underline;
   }
 
-  h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-
   p {
     line-height: 1.8;
-    color: var(--color-nv-p);
   }
 
   h1,
@@ -48,6 +31,38 @@ Use it to make something cool, have fun, and share what you've learned with othe
   h5,
   h6 {
     line-height: 1.3;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  } /* Adjust as needed */
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.75rem;
+  }
+  h4 {
+    font-size: 1.5rem;
+  }
+  h5 {
+    font-size: 1.25rem;
+  }
+  h6 {
+    font-size: 1rem;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: #ffffff;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  li {
+    list-style: none;
+    color: var(--color-nv-p) !important;
   }
 }
 
@@ -63,7 +78,6 @@ Use it to make something cool, have fun, and share what you've learned with othe
   --color-nv-p: #d7d7d7;
   --color-nv-nav-btn: #2b83cc;
   --color-nv-nav-btn-hover: #266598;
-  --color-nv-text-gray: #8f8f8f;
   --color-nv-chapter-text: #d7d7d7;
   --color-nv-tag: #202324;
   --color-nv-text-gray: #8f8f8f;
@@ -74,6 +88,26 @@ Use it to make something cool, have fun, and share what you've learned with othe
   --color-nv-x: #000000;
   --color-nv-pinterest: #e60019;
   --color-nv-chapter-odd: rgb(30, 30, 30);
+}
+
+ul.wp-block-list {
+  margin: 0 0 1em 2em;
+  padding: 0;
+}
+
+.wp-block-list li {
+  margin-bottom: 0.5em;
+  list-style-type: disc;
+}
+
+.wp-block-heading {
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 1em;
+}
+
+.content .chapter-content > * {
+  margin-top: 1.5rem;
 }
 
 .dropdown-content {
@@ -252,4 +286,8 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
 .series-synopsis:has(+ .show-more-btn:checked) {
   max-height: none;
+}
+
+ol.children li {
+  margin-left: 3rem;
 }

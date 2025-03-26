@@ -54,4 +54,9 @@ $series_image = get_the_post_thumbnail_url($series_id, array(200, 300));
 
     <?php nv_the_series_chapters(); ?>
 </div>
+
+<?php if (comments_open()): ?>
+    <?php comments_template(); ?>
+<?php endif; ?>
+
 <?php get_footer(); ?>

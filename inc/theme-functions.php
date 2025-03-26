@@ -16,4 +16,9 @@ function nv_wp_body_open()
 }
 add_action('wp_body_open', 'nv_wp_body_open');
 
-
+require_once THEME_DIR . '/inc/structure/comment-form.php';
+require_once THEME_DIR . '/inc/structure/comment-field.php';
+require_once THEME_DIR . '/inc/structure/card-series.php';
+require_once THEME_DIR . '/inc/template-chapter.php';
+require_once THEME_DIR . '/inc/template-parts.php';
+require_once THEME_DIR . '/inc/template-series.php';

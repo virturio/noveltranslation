@@ -1,8 +1,4 @@
 <?php
-/**
- * Template for displaying single chapter content
- */
-
 get_header();
 
 // Get chapter data
@@ -11,7 +7,7 @@ $chapter_title = get_post_meta($chapter_id, '_nv_chapter_title', true);
 ?>
 
 <!-- Header Section -->
-<div class="mb-4 text-start w-full">
+<div class="mb-4 text-start w-full bg-nv-header rounded-lg p-6">
     <h1 class="text-xl font-semibold mb-2">
         <?php the_title(); ?>
     </h1>
@@ -19,11 +15,13 @@ $chapter_title = get_post_meta($chapter_id, '_nv_chapter_title', true);
     <?php nv_construct_breadcrumb(); ?>
 </div>
 
+<div class="">
+    <?php nv_display_chapter_navigation(); ?>
+</div>
 <!-- Top Navigation -->
-<?php nv_display_chapter_navigation(); ?>
 
 <!-- Chapter Content -->
-<article class="content flex flex-col gap-4 py-4 w-full">
+<article class="content flex flex-col gap-4 py-4 w-full bg-nv-header rounded-lg p-6 my-3">
     <?php if ($chapter_title): ?>
         <h2 class="font-semibold m-auto text-center text-xl">
             <?php echo esc_html($chapter_title); ?>
@@ -36,5 +34,12 @@ $chapter_title = get_post_meta($chapter_id, '_nv_chapter_title', true);
 </article>
 
 <!-- Bottom Navigation -->
-<?php nv_display_chapter_navigation(); ?>
+<div class="">
+    <?php nv_display_chapter_navigation(); ?>
+</div>
+
+<!-- Comments Section -->
+<?php if (comments_open()): ?>
+    <?php comments_template(); ?>
+<?php endif; ?>
 <?php get_footer(); ?>

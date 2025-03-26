@@ -153,7 +153,7 @@ if (!function_exists('nv_construct_tags')) {
             <div class="flex flex-col gap-4">
                 <div class="flex flex-wrap gap-2 tag-container">
                     <?php foreach ($tags as $tag): ?>
-                        <span class="px-3 py-1 bg-nv-tag border border-nv-border rounded text-xs font-light tracking-wider">
+                        <span class="px-3 py-1 bg-nv-border/30 border border-nv-border rounded text-xs font-light tracking-wider">
                             <?php echo esc_html($tag); ?>
                         </span>
                     <?php endforeach; ?>
@@ -199,32 +199,32 @@ if (!function_exists('nv_construct_series_details')) {
         ?>
                 <div class="flex gap-6 max-md:flex-col">
                     <div class="space-y-2">
-                        <p class="text-base font-semibold tracking-wide">
+                        <h5 class="text-base font-semibold tracking-wide">
                             Status: <span class="font-light"><?php echo esc_html($details['status']); ?></span>
-                        </p>
-                        <p class="text-base font-semibold tracking-wide">
+                        </h5>
+                        <h5 class="text-base font-semibold tracking-wide">
                             Publisher:
                             <span class="font-light"><?php echo esc_html($details['publisher']['name']); ?></span>
-                        </p>
-                        <p class="text-base font-semibold tracking-wide">
+                        </h5>
+                        <h5 class="text-base font-semibold tracking-wide">
                             Author:
                             <span class="font-light"><?php echo esc_html($details['author']['name']); ?></span>
-                        </p>
+                        </h5>
                     </div>
                     <div class="space-y-2">
-                        <p class="text-base font-semibold tracking-wide">
+                        <h5 class="text-base font-semibold tracking-wide">
                             Raw Source:
                             <a href="<?php echo esc_url($details['rawsource_url']); ?>" target="_blank"
                                 class="hover:underline text-blue-500 font-light">
                                 <span class="font-light"><?php echo truncate_text($details['rawsource_url'], 20); ?></span>
                             </a>
-                        </p>
-                        <p class="text-base font-semibold tracking-wide">
+                        </h5>
+                        <h5 class="text-base font-semibold tracking-wide">
                             Posted at: <span class="font-light"><?php echo esc_html($details['post_date']); ?></span>
-                        </p>
-                        <p class="text-base font-semibold tracking-wide">
+                        </h5>
+                        <h5 class="text-base font-semibold tracking-wide">
                             Views: <span class="font-light">223</span>
-                        </p>
+                        </h5>
                     </div>
                 </div>
                 <?php
@@ -246,9 +246,9 @@ if (!function_exists('nv_construct_series_alternative_names')) {
                         Alternative Names
                     </h2>
                     <?php foreach ($names as $name): ?>
-                        <p class="text-sm tracking-wide leading-relaxed">
+                        <span class="block text-sm tracking-wide leading-relaxed">
                             <?php echo esc_html($name); ?>
-                        </p>
+                        </span>
                     <?php endforeach; ?>
                 </div>
                 <?php

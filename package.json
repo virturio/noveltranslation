@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tailwindcss -i ./input.css -o ./style.css",
-    "watch": "tailwindcss -i ./input.css -o ./style.css --watch",
+    "build": "tailwindcss -i ./assets/css/input.css -o ./assets/css/tailwind.css",
+    "watch": "tailwindcss -i ./assets/css/input.css -o ./assets/css/tailwind.css --watch",
     "start": "browser-sync start --proxy http://localhost:10005/ --files \"**/*\""
   },
   "keywords": [],
